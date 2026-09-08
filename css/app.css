@@ -124,7 +124,7 @@ img { display: block; -webkit-user-drag: none; pointer-events: none; }
 #s-landing { background: var(--orange); --pad-top: #EF6A00; --pad-bottom: #EF6A00; }
 #s-landing .blob  { left: -316.4px; top: 549.8px; width: 1797px; height: 852.8px; color: #fff;
                     --src: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0zMTYuNDMgNTQ5Ljc3IDE3OTcuMDIgODUyLjc2Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik0gLTIzNC4yMjI2NTYgODU3IEMgLTE1LjU0Njg3NSAxMDMyLjI3MzQzOCAyMDQuNTUwNzgxIDExNzcuODE2NDA2IDI4MC41MDc4MTIgMTExNy43NjU2MjUgQyAzNDAuOTI5Njg4IDEwNzAgMjUyLjc0MjE4OCA5MzcuNTE5NTMxIDMwNi44MDg1OTQgODI4LjcyMjY1NiBDIDQ0NS40Mzc1IDU0OS43NzM0MzggMTQxNi45MzM1OTQgNjMyLjQ0MTQwNiAxNDUwLjU1ODU5NCA4MjguNzIyNjU2IEMgMTQ4MC41ODU5MzggMTAwMy45NjQ4NDQgNzczLjYwNTQ2OSAxMzMxLjQxNzk2OSAxMTAuODUxNTYyIDEzODcuOTYwOTM4IEMgLTU5Ljk2ODc1IDE0MDIuNTM1MTU2IC0yMDYuMzUxNTYyIDEzOTcuMjc3MzQ0IC0zMTYuNDMzNTk0IDEzODcuOTYwOTM4ICIvPjwvc3ZnPg=='); }
-#s-landing .hero  { left: -56.1px; top: -135.9px; width: 2428.3px; height: 2531.6px; }
+#s-landing .hero  { left: -40px; top: 666px; width: 1140px; height: 642px; }
 #s-landing h1 {
   right: 50.6px; top: 203.8px;
   font: 120px/144px var(--display); color: #fff;
@@ -143,7 +143,7 @@ img { display: block; -webkit-user-drag: none; pointer-events: none; }
 
 /* =========================== ٢ · الجنس =========================== */
 #s-gender { background: #8D827A; --pad-top: #897D76; --pad-bottom: #95918D; }
-#s-gender .bg { left: -28.6px; top: -12.3px; width: 1128.5px; height: 1949.4px; }
+#s-gender .bg { left: -28.6px; top: -12.3px; width: 1128px; height: 1949px; }
 /* طبقة التعتيم اللي في التصميم — محسوبة من الأصل: 0.467×الصورة + 37.7 */
 #s-gender .veil { top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; background: rgba(71, 71, 71, .533); }
 #s-gender .steps { top: 251.3px; color: #fff; }
