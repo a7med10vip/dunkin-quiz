@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>ايش قهوتك من دانكن</title>
+
+<!-- لون واجهة المتصفح (شريط العنوان وشريط الحالة) برتقالي دانكن -->
+<meta name="theme-color" content="#EF6A00">
+<meta name="color-scheme" content="light">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="دانكن">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- الخطوط أول حاجة تظهر — تحميلها بدري يمنع رمشة النص -->
+<link rel="preload" as="image" href="assets/img/hero-landing.webp">
+
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="stage">
+
+  <!-- ══════════════════ ١ · الهبوط ══════════════════ -->
+  <section class="screen" id="s-landing">
+    <i class="ico blob"></i>
+    <img class="hero" src="assets/img/hero-landing.webp" alt="">
+    <i class="ico logo white"></i>
+    <h1 class="t">ايش قهوتك<br>من دانكن</h1>
+    <img class="cup" src="assets/vector/cup-white.svg" alt="">
+    <p class="t sub">اكتشف شخصيتك</p>
+    <button class="btn start" data-go="gender">
+      <img class="play" src="assets/vector/play.svg" alt="">
+      <span class="t">ابـــدأ تـــجــربـتـــك</span>
+    </button>
+  </section>
+
+  <!-- ══════════════════ ٢ · تحديد الجنس ══════════════════ -->
+  <section class="screen" id="s-gender">
+    <img class="bg" src="assets/img/bg-iced.webp" alt="">
+    <i class="veil"></i>
+    <i class="ico logo white"></i>
+    <i class="btn ico back white" data-back role="button" aria-label="رجوع"></i>
+    <div class="steps"><i class="done"></i><i></i><i></i><i></i></div>
+    <h1 class="t">حدد جنسك</h1>
+    <button class="btn pick f t" data-gender="f" data-go="q1">انثى</button>
+    <button class="btn pick m t" data-gender="m" data-go="q1">ذكر</button>
+  </section>
+
+  <!-- ══════════════════ ٣ · السؤال الأول ══════════════════ -->
+  <section class="screen" id="s-q1">
+    <i class="ico logo orange"></i>
+    <i class="btn ico back pink" data-back role="button" aria-label="رجوع"></i>
+    <div class="steps"><i class="done"></i><i class="done"></i><i></i><i></i></div>
+    <h1 class="t">وش أكثر شي يمثل<br>يومك المثالي</h1>
+    <img class="cup" src="assets/vector/cup-orange.svg" alt="">
+    <img class="machine" src="assets/img/machine.webp" alt="ماكينة دانكن">
+    <button class="btn opt light-on-dark" data-go="q2">جلسة هادية مع<br>الناس اللي أحبهم</button>
+    <button class="btn opt light-on-dark" data-go="q2">اكتشف مكان<br>جــــــــديــــــــد</button>
+    <button class="btn opt light-on-dark" data-go="q2">اطلع للمكان اللي<br>الكل يتكلم عنه</button>
+    <button class="btn opt light-on-dark" data-go="q2">اشتغل على هدف<br>أو انجز شي</button>
+  </section>
+
+  <!-- ══════════════ ٤ · السؤال الثاني — ذكر ══════════════ -->
+  <section class="screen s-q2 grid6" id="s-q2-m">
+    <i class="ico logo orange"></i>
+    <i class="btn ico back pink" data-back role="button" aria-label="رجوع"></i>
+    <div class="steps"><i class="done"></i><i class="done"></i><i class="done"></i><i></i></div>
+    <h1 class="t">إذا أصحابك يوصفونك<br>بكلمة وش بتكون ؟</h1>
+    <button class="btn word light-on-dark" data-go="q3"><img src="assets/icons/tomooh.webp"  alt=""><b>طموح</b></button>
+    <button class="btn word light-on-dark" data-go="q3"><img src="assets/icons/rayeq.webp"   alt=""><b>رايق</b></button>
+    <button class="btn word light-on-dark" data-go="q3"><img src="assets/icons/ejtemai.webp" alt=""><b>اجتماعي</b></button>
+    <button class="btn word light-on-dark" data-go="q3"><img src="assets/icons/fudooli.webp" alt=""><b>فضولي</b></button>
+    <button class="btn word light-on-dark" data-go="q3"><img src="assets/icons/classic.webp" alt=""><b>كلاسيكي</b></button>
+    <button class="btn word light-on-dark" data-go="q3"><img src="assets/icons/molhem.webp"  alt=""><b>ملهم</b></button>
+  </section>
+
+  <!-- ══════════════ ٥ · السؤال الثاني — أنثى ══════════════ -->
+  <section class="screen s-q2 grid6" id="s-q2-f">
+    <i class="ico logo orange"></i>
+    <i class="btn ico back pink" data-back role="button" aria-label="رجوع"></i>
+    <div class="steps"><i class="done"></i><i class="done"></i><i class="done"></i><i></i></div>
+    <h1 class="t">إذا صحباتك يوصفونك<br>بكلمة وش بتكون ؟</h1>
+    <button class="btn word light-on-dark" data-go="q3"><img src="assets/icons/tomooh.webp"  alt=""><b>طموحة</b></button>
+    <button class="btn word light-on-dark" data-go="q3"><img src="assets/icons/rayeq.webp"   alt=""><b>رايقة</b></button>
+    <button class="btn word light-on-dark" data-go="q3"><img src="assets/icons/ejtemai.webp" alt=""><b>اجتماعية</b></button>
+    <button class="btn word light-on-dark" data-go="q3"><img src="assets/icons/fudooli.webp" alt=""><b>فضولية</b></button>
+    <button class="btn word light-on-dark" data-go="q3"><img src="assets/icons/classic.webp" alt=""><b>كلاسيكية</b></button>
+    <button class="btn word light-on-dark" data-go="q3"><img src="assets/icons/molhem.webp"  alt=""><b>ملهمة</b></button>
+  </section>
+
+  <!-- ══════════════ ٦ · السؤال الثالث — ذكر ══════════════ -->
+  <section class="screen s-q3 grid6" id="s-q3-m">
+    <i class="ico logo orange"></i>
+    <i class="btn ico back pink" data-back role="button" aria-label="رجوع"></i>
+    <div class="steps"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i></div>
+    <h1 class="t">اختار العبارة الأقرب<br>لــــشـــخــصـــيــتـــــك</h1>
+    <button class="btn cap" data-persona="mobader"><img src="assets/img/capsule-0.webp" width="460" alt=""><b>السبّاق</b></button>
+    <button class="btn cap" data-persona="thawwaq"><img src="assets/img/capsule-1.webp" width="382" alt=""><b>الانتقائي</b></button>
+    <button class="btn cap" data-persona="mughamer"><img src="assets/img/capsule-4.webp" width="470" alt=""><b>المستكشف</b></button>
+    <button class="btn cap" data-persona="qarar"><img src="assets/img/capsule-2.webp" width="444" alt=""><b>الحاسم</b></button>
+    <button class="btn cap" data-persona="hudoor"><img src="assets/img/capsule-5.webp" width="457" alt=""><b>المؤثر</b></button>
+    <button class="btn cap" data-persona="waqei"><img src="assets/img/capsule-3.webp" width="488" alt=""><b>المنطقي</b></button>
+  </section>
+
+  <!-- ══════════════ ٧ · السؤال الثالث — أنثى ══════════════ -->
+  <section class="screen s-q3 grid6" id="s-q3-f">
+    <i class="ico logo orange"></i>
+    <i class="btn ico back pink" data-back role="button" aria-label="رجوع"></i>
+    <div class="steps"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i></div>
+    <h1 class="t">اختاري العبارة الأقرب<br>لــــشـــخــصـــيــتـــــك</h1>
+    <button class="btn cap" data-persona="mobader"><img src="assets/img/capsule-0.webp" width="460" alt=""><b>السبّاقة</b></button>
+    <button class="btn cap" data-persona="thawwaq"><img src="assets/img/capsule-1.webp" width="382" alt=""><b>الانتقائية</b></button>
+    <button class="btn cap" data-persona="mughamer"><img src="assets/img/capsule-4.webp" width="470" alt=""><b>المستكشفة</b></button>
+    <button class="btn cap" data-persona="qarar"><img src="assets/img/capsule-2.webp" width="444" alt=""><b>الحاسمة</b></button>
+    <button class="btn cap" data-persona="hudoor"><img src="assets/img/capsule-5.webp" width="457" alt=""><b>المؤثرة</b></button>
+    <button class="btn cap" data-persona="waqei"><img src="assets/img/capsule-3.webp" width="488" alt=""><b>المنطقية</b></button>
+  </section>
+
+  <!-- ══════════════════ ٨ · شاشة الانتقال ══════════════════ -->
+  <section class="screen" id="s-loading">
+    <img class="bg" src="assets/img/pour-dark.webp" alt="">
+    <i class="veil"></i>
+    <i class="ico logo white"></i>
+    <i class="btn ico back white" data-back role="button" aria-label="رجوع"></i>
+    <p class="t l1">يــــــــــــــــــــــلا</p>
+    <p class="t l2">نشوف</p>
+    <p class="t l3">النتيجة</p>
+  </section>
+
+  <!-- ══════════════════ ٩ · النتيجة ══════════════════ -->
+  <section class="screen" id="s-result">
+    <img class="bg" src="" alt="">
+    <i class="scrim"></i>
+    <i class="ico logo white"></i>
+    <p class="t kicker">شخصيتك هي</p>
+    <p class="t name"></p>
+    <p class="t badge"></p>
+    <p class="desc"></p>
+    <button class="btn cta t" data-go="grid"></button>
+  </section>
+
+  <!-- ══════════════════ ١٠ · اكتشف النكهات ══════════════════ -->
+  <section class="screen" id="s-flavors">
+    <img class="bg" src="assets/img/family-products.webp" alt="">
+    <i class="veil"></i>
+    <i class="ico logo white"></i>
+    <button class="btn title t light-on-dark" data-go="grid">اكتشف النكهات الأخرى</button>
+  </section>
+
+  <!-- ══════════════════ ١١ · شبكة النكهات ══════════════════ -->
+  <section class="screen" id="s-grid">
+    <i class="ico logo white"></i>
+    <h1 class="t">اكتشف النكهات الأخرى</h1>
+    <div class="cards"></div>
+    <button class="btn again t" data-restart>ابدأ من جديد</button>
+  </section>
+
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

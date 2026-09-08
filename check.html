@@ -1,0 +1,41 @@
+<!doctype html><html lang="ar" dir="rtl"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>فحص المتصفح</title>
+<style>
+body{margin:0;padding:24px;background:#EF6A00;color:#fff;font:16px/1.6 system-ui,sans-serif}
+h1{font-size:34px;margin:0 0 16px}
+p{font-size:22px;margin:6px 0;word-break:break-all}
+.ok{color:#9EFFA8}.no{color:#FFC9C9}
+#ua{font-size:15px;opacity:.85;margin-top:18px}
+</style></head><body>
+<h1>فحص متصفح الشاشة</h1>
+<div id="r">...</div>
+<p id="ua"></p>
+<script>
+/* ES5 بالكامل — عشان يشتغل حتى على متصفح قديم جداً */
+var out = [], d = document;
+function t(name, ok){ out.push('<p>' + (ok ? '<span class="ok">✓</span> ' : '<span class="no">✗</span> ') + name + '</p>'); }
+function css(prop, val){ var e = d.createElement('i'); try { e.style[prop] = val; return !!e.style[prop]; } catch(x){ return false; } }
+t('متغيّرات CSS', !!(window.CSS && CSS.supports && CSS.supports('--a','0')));
+t('CSS mask', css('webkitMaskImage','url(a.svg)') || css('maskImage','url(a.svg)'));
+t('Flexbox', css('display','flex'));
+t('CSS Grid', css('display','grid'));
+t('transform', css('transform','scale(.5)'));
+t('Promise', typeof Promise === 'function');
+t('Arrow / ES6', (function(){ try { new Function('()=>1'); return true; } catch(e){ return false; } })());
+t('URLSearchParams', typeof URLSearchParams === 'function');
+t('Element.closest', !!(Element.prototype && Element.prototype.closest));
+t('Pointer Events', typeof PointerEvent === 'function');
+t('localStorage', (function(){ try { localStorage.setItem('a','1'); localStorage.removeItem('a'); return true; } catch(e){ return false; } })());
+t('Cookies', navigator.cookieEnabled === true);
+var im = new Image();
+im.onload = function(){ done(im.width === 1); };
+im.onerror = function(){ done(false); };
+im.src = 'data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==';
+function done(webpOk){
+  t('صور WebP', webpOk);
+  d.getElementById('r').innerHTML = out.join('');
+  d.getElementById('ua').textContent = navigator.userAgent;
+}
+setTimeout(function(){ if (d.getElementById('r').innerHTML === '...') done(false); }, 2500);
+</script></body></html>
