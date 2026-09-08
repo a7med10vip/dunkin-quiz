@@ -209,30 +209,6 @@
       'screen on: ' + (current ? current.id : '-') + '\n';
   }
 
-  /* ------------------- التحميل المسبق ------------------- */
-  /* كل صورة هتظهر بعد شاشة البداية بتتحمّل وتتفكّ وهي لسه على الهبوط
-     (والناس بتقرا) — فكل انتقال بعد كده فوري. مفيش أي تغيير في الصور نفسها. */
-  function warm() {
-    const list = ['assets/img/bg-iced.webp', 'assets/img/machine.webp', 'assets/img/pour-dark.webp'];
-    ['tomooh','rayeq','ejtemai','fudooli','classic','molhem'].forEach(function (n) { list.push('assets/icons/' + n + '.webp'); });
-    for (let i = 0; i < 6; i++) list.push('assets/img/capsule-' + i + '.webp');
-    Object.keys(PERSONAS).forEach(function (k) {
-      list.push('assets/photos/' + PERSONAS[k].m.photo + '.webp');
-      list.push('assets/photos/' + PERSONAS[k].f.photo + '.webp');
-    });
-    FLAVORS.forEach(function (f) { list.push('assets/flavors/' + f.img + '.webp'); });
-    /* واحدة ورا التانية عشان ما نخنقش جهاز ضعيف — بالترتيب اللي المستخدم هيشوفه */
-    let i = 0;
-    (function next() {
-      if (i >= list.length) return;
-      const im = new Image();
-      const go = function () { setTimeout(next, 30); };
-      im.onload = function () { (im.decode ? im.decode() : Promise.resolve()).then(go, go); };
-      im.onerror = go;
-      im.src = list[i++];
-    })();
-  }
-
   /* -------------------- الإقلاع -------------------- */
   buildGrid();
   fit();
@@ -245,5 +221,4 @@
   if (qs.get('g')) state.gender = qs.get('g');       /* يشتغل مع كل الشاشات مش النتيجة بس */
   if (jump === 'result') { state.persona = qs.get('p') || 'mughamer'; showResult(); }
   else show(jump || 'landing');
-  setTimeout(warm, 600);            /* بعد ما شاشة البداية ترسم */
 })();
