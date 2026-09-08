@@ -4,6 +4,8 @@
 (function () {
   'use strict';
 
+  document.documentElement.className += ' js';   /* بيلغي شبكة أمان الـCSS */
+
   const stage = document.getElementById('stage');
   const $ = (s, r) => (r || document).querySelector(s);
   const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));

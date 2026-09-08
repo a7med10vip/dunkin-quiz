@@ -121,6 +121,11 @@ img { display: block; -webkit-user-drag: none; pointer-events: none; }
 .btn.light-on-dark.down::after { background: rgba(255, 255, 255, .20); }
 
 /* =========================== ١ · الهبوط =========================== */
+/* شبكة أمان: لو app.js ما نزلش لأي سبب (شبكة، نشر لسه بيتم)،
+   شاشة الهبوط تفضل ظاهرة بدل شاشة بيضا فاضية. أول ما الجافاسكربت
+   يشتغل بيحط .js على <html> فالقاعدة دي بتتلغي وتشتغل .on عادي. */
+html:not(.js) #s-landing { opacity: 1; visibility: visible; }
+
 #s-landing { background: var(--orange); --pad-top: #EF6A00; --pad-bottom: #EF6A00; }
 #s-landing .blob  { left: -316.4px; top: 549.8px; width: 1797px; height: 852.8px; color: #fff;
                     --src: url('../assets/vector/blob.svg'); }
