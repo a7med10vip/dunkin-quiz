@@ -149,19 +149,37 @@
   window.addEventListener('keydown', e => { if (e.key === 'Escape') reset(); });
 
   /* --------------- تحجيم المسرح --------------- */
+  /* أجهزة العرض الرقمية بترجّع مقاسات صفر قبل أول رسم — لازم نتعامل مع ده،
+     غير كده المقياس بيطلع رقم خيالي والشاشة تطلع لون واحد من غير محتوى. */
+  var fitTries = 0;
+  function viewport() {
+    var de = document.documentElement, b = document.body;
+    var w = de.clientWidth  || window.innerWidth  || (b && b.clientWidth)  || 0;
+    var h = de.clientHeight || window.innerHeight || (b && b.clientHeight) || 0;
+    /* آخر ملجأ: مقاس الشاشة نفسها */
+    if (!w && window.screen) w = screen.width  || 0;
+    if (!h && window.screen) h = screen.height || 0;
+    return [w, h];
+  }
   function fit() {
-    const de = document.documentElement;
-    const w = Math.min(innerWidth  || 1e9, de.clientWidth  || 1e9);
-    const h = Math.min(innerHeight || 1e9, de.clientHeight || 1e9);
-    const s = Math.min(w / 1080, h / 1920);
-    /* التوسيط بالبكسل — أوضح وأأمن من النِسب مع الـtransform */
-    const dx = Math.round((w - 1080 * s) / 2);
-    const dy = Math.round((h - 1920 * s) / 2);
-    stage.style.transform = `translate(${dx}px, ${dy}px) scale(${s})`;
+    var v = viewport(), w = v[0], h = v[1];
+    if (!w || !h) {                       /* لسه مش جاهز — جرّب تاني */
+      if (fitTries++ < 40) { setTimeout(fit, 100); return; }
+      w = 1080; h = 1920;                 /* استسلمنا — اعرض المحتوى بدل شاشة فاضية */
+    }
+    var s = Math.min(w / 1080, h / 1920);
+    if (!isFinite(s) || s <= 0) s = 1;
+    s = Math.max(0.05, Math.min(s, 8));   /* حدود عاقلة تمنع أي رقم شاذ */
+    var dx = Math.round((w - 1080 * s) / 2);
+    var dy = Math.round((h - 1920 * s) / 2);
+    stage.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(' + s + ')';
+    stage.style.visibility = 'visible';
   }
   addEventListener('resize', fit);
-  addEventListener('orientationchange', () => setTimeout(fit, 120));
-  if (window.visualViewport) window.visualViewport.addEventListener('resize', fit);
+  addEventListener('orientationchange', function () { setTimeout(fit, 120); });
+  addEventListener('load', function () { fitTries = 0; fit(); });
+  if (window.visualViewport && window.visualViewport.addEventListener)
+    window.visualViewport.addEventListener('resize', fit);
 
   /* -------------------- الإقلاع -------------------- */
   buildGrid();
