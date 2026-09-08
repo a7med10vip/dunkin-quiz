@@ -6,7 +6,7 @@
 
   const stage = document.getElementById('stage');
   const $ = (s, r) => (r || document).querySelector(s);
-  const $$ = (s, r) => [...(r || document).querySelectorAll(s)];
+  const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
 
   const state = { gender: 'm', persona: null };
   let current = null, idleTimer = null, loadTimer = null, loadToken = 0;
@@ -104,14 +104,18 @@
   }
 
   /* ---------------------- الضغط ---------------------- */
-  /* رد فعل بصري خفيف — شاشة اللمس محتاجة تأكيد إن اللمسة وصلت */
-  stage.addEventListener('pointerdown', e => {
+  /* الفعل نفسه على click — بيشتغل على أي متصفح ولمس أو ماوس.
+     رد الفعل البصري على mouse/touch (Pointer Events مش موجودة في المتصفحات القديمة). */
+  function pressStart(e) { const b = e.target.closest('.btn'); if (b) b.classList.add('down'); }
+  function pressEnd()    { $$('.btn.down').forEach(function (x) { x.classList.remove('down'); }); }
+  stage.addEventListener('mousedown',  pressStart);
+  stage.addEventListener('touchstart', pressStart, { passive: true });
+  stage.addEventListener('mouseup',    pressEnd);
+  stage.addEventListener('touchend',   pressEnd);
+  stage.addEventListener('touchcancel',pressEnd);
+
+  stage.addEventListener('click', function (e) {
     const b = e.target.closest('.btn');
-    if (b) b.classList.add('down');
-  });
-  stage.addEventListener('pointerup', e => {
-    const b = e.target.closest('.btn');
-    $$('.btn.down').forEach(x => x.classList.remove('down'));
     if (!b) return;
 
     if (b.dataset.gender) state.gender = b.dataset.gender;
@@ -125,17 +129,16 @@
       /* سقف زمني: لو الصورة اتأخرت لأي سبب، النتيجة تظهر برضه ما تعلّقش */
       const ready  = Promise.race([
         preloadPhoto(PERSONAS[state.persona][state.gender].photo),
-        new Promise(r => setTimeout(r, SETTINGS.PHOTO_WAIT_MS))
+        new Promise(function (r) { setTimeout(r, SETTINGS.PHOTO_WAIT_MS); })
       ]);
-      const waited = new Promise(r => { loadTimer = setTimeout(r, SETTINGS.LOADING_MS); });
-      Promise.all([ready, waited]).then(() => { if (token === loadToken) showResult(); });
+      const waited = new Promise(function (r) { loadTimer = setTimeout(r, SETTINGS.LOADING_MS); });
+      Promise.all([ready, waited]).then(function () { if (token === loadToken) showResult(); });
       return;
     }
     if (b.dataset.back !== undefined)    { back();  return; }
     if (b.dataset.restart !== undefined) { reset(); return; }
     if (b.dataset.go) show(b.dataset.go);
   });
-  stage.addEventListener('pointercancel', () => $$('.btn.down').forEach(x => x.classList.remove('down')));
 
   /* ------------------ دورة الإيفنت ------------------ */
   function resetIdle(name) {
@@ -143,8 +146,9 @@
     if (name === 'landing') return;             /* شاشة الهبوط تفضل مفتوحة */
     idleTimer = setTimeout(reset, SETTINGS.IDLE_MS);
   }
-  ['pointerdown', 'pointermove'].forEach(ev =>
-    window.addEventListener(ev, () => { if (current && current.id !== 's-landing') resetIdle(); }, { passive: true }));
+  ['mousedown', 'mousemove', 'touchstart', 'keydown'].forEach(function (ev) {
+    window.addEventListener(ev, function () { if (current && current.id !== 's-landing') resetIdle(); }, { passive: true });
+  });
 
   window.addEventListener('keydown', e => { if (e.key === 'Escape') reset(); });
 
@@ -181,12 +185,37 @@
   if (window.visualViewport && window.visualViewport.addEventListener)
     window.visualViewport.addEventListener('resize', fit);
 
+  /* ------------------- التشخيص على الشاشة ------------------- */
+  /* لو حصل أي خطأ، اعرضه بخط كبير على الشاشة — الجهاز يقولنا المشكلة بنفسه */
+  function diagBox() {
+    let d = document.getElementById('diag');
+    if (!d) {
+      d = document.createElement('pre'); d.id = 'diag';
+      d.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:99999;margin:0;padding:14px 18px;' +
+        'background:rgba(0,0,0,.85);color:#9EFFA8;font:15px/1.5 monospace;white-space:pre-wrap;direction:ltr;text-align:left';
+      document.body.appendChild(d);
+    }
+    return d;
+  }
+  window.onerror = function (msg, src, line) {
+    diagBox().textContent += 'ERROR: ' + msg + '  @' + (src || '').split('/').pop() + ':' + line + '\n';
+  };
+  function diagInfo() {
+    const v = viewport();
+    diagBox().textContent =
+      'UA: ' + navigator.userAgent + '\n' +
+      'viewport: ' + v[0] + 'x' + v[1] + '   screen: ' + screen.width + 'x' + screen.height + '\n' +
+      'transform: ' + stage.style.transform + '\n' +
+      'screen on: ' + (current ? current.id : '-') + '\n';
+  }
+
   /* -------------------- الإقلاع -------------------- */
   buildGrid();
   fit();
 
   const qs = new URLSearchParams(location.search);
   if (qs.get('debug') === '1') document.body.classList.add('debug');
+  if (qs.get('diag')  === '1') { diagInfo(); setInterval(diagInfo, 1000); }
   if (qs.get('nohero') === '1') document.body.classList.add('nohero');
   const jump = qs.get('screen');
   if (qs.get('g')) state.gender = qs.get('g');       /* يشتغل مع كل الشاشات مش النتيجة بس */

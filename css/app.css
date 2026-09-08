@@ -44,7 +44,7 @@ html {
 }
 body {
   /* position:fixed على الـbody بس — بيمنع السحب والارتداد على iOS */
-  position: fixed; inset: 0; margin: 0;
+  position: fixed; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; margin: 0;
   background: linear-gradient(to bottom,
               var(--pad-top, #000) 0 50%, var(--pad-bottom, #000) 50% 100%);
   overflow: hidden;
@@ -66,7 +66,7 @@ body.kiosk, body.kiosk * { cursor: none; }
 }
 
 .screen {
-  position: absolute; inset: 0; overflow: hidden;
+  position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; overflow: hidden;
   opacity: 0; visibility: hidden; transition: opacity .22s ease;
 }
 .screen.on { opacity: 1; visibility: visible; }
@@ -114,7 +114,7 @@ img { display: block; -webkit-user-drag: none; pointer-events: none; }
 .btn { cursor: pointer; border: 0; background: none; font: inherit; }
 .btn.ico { background: currentColor; }   /* الأيقونات القابلة للضغط تفضل mask ملوّن */
 .btn::after {
-  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0; border-radius: inherit;
   background: transparent; transition: background .09s linear;
 }
 .btn.down::after       { background: rgba(0, 0, 0, .12); }
@@ -145,7 +145,7 @@ img { display: block; -webkit-user-drag: none; pointer-events: none; }
 #s-gender { background: #8D827A; --pad-top: #897D76; --pad-bottom: #95918D; }
 #s-gender .bg { left: -28.6px; top: -12.3px; width: 1128.5px; height: 1949.4px; }
 /* طبقة التعتيم اللي في التصميم — محسوبة من الأصل: 0.467×الصورة + 37.7 */
-#s-gender .veil { inset: 0; background: rgba(71, 71, 71, .533); }
+#s-gender .veil { top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; background: rgba(71, 71, 71, .533); }
 #s-gender .steps { top: 251.3px; color: #fff; }
 #s-gender h1 { right: 167px; top: 520.2px; font: 139px/1.2 var(--display); color: #fff; }
 #s-gender .pick {
@@ -186,13 +186,14 @@ img { display: block; -webkit-user-drag: none; pointer-events: none; }
 .s-q2 .word img { flex: 1; min-height: 0; width: 100%; object-fit: contain; }
 .s-q2 .word b {
   font: 56px/1.2 var(--display); color: #fff; font-weight: 400;
-  display: flex; align-items: center; gap: 16px;
+  display: flex; align-items: center;
 }
 .s-q2 .word b::before, .s-q2 .word b::after {
   content: ''; width: 46px; height: 30px; flex: none;
   background: var(--dash) center/contain no-repeat;
 }
-.s-q2 .word b::after { transform: scaleX(-1); }
+.s-q2 .word b::before { margin-left: 16px; }     /* بديل gap لكروم القديم */
+.s-q2 .word b::after  { margin-right: 16px; transform: scaleX(-1); }
 
 /* ================= ٦/٧ · السؤال الثالث (الكبسولات) ================= */
 .s-q3 { background: #fff; --pad-top: #FFFFFF; --pad-bottom: #FFFFFF; }
@@ -253,7 +254,7 @@ img { display: block; -webkit-user-drag: none; pointer-events: none; }
 #s-loading { background: #1a1008; --pad-top: #140701; --pad-bottom: #170903; }
 #s-loading .bg { left: -54.1px; top: -37.3px; width: 1203.3px; height: 1983.7px; }
 /* تعتيم التصميم: الصورة × 0.336 */
-#s-loading .veil { inset: 0; background: rgba(0, 0, 0, .664); }
+#s-loading .veil { top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, .664); }
 #s-loading .l1 { left: 255px; top: 439.3px; font: 150px/1.2 var(--display); color: #fff; }
 #s-loading .l2 { left: 255px; top: 619.3px; font: 150px/1.2 var(--display); color: #fff; }
 #s-loading .l3 { left: 255px; top: 799.3px; font: 150px/1.2 var(--display); color: #fff; }
@@ -264,7 +265,7 @@ img { display: block; -webkit-user-drag: none; pointer-events: none; }
 #s-result .bg { left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
 /* شاددو من تحت لفوق عشان النص يبان أوضح فوق الصورة */
 #s-result .scrim {
-  inset: 0; pointer-events: none;
+  top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
   background: linear-gradient(to top,
               rgba(20, 8, 0, .82) 0%,
               rgba(20, 8, 0, .72) 22%,
@@ -294,7 +295,7 @@ img { display: block; -webkit-user-drag: none; pointer-events: none; }
 #s-flavors { background: #7A3B0A; --pad-top: #8F3509; --pad-bottom: #886965; }
 #s-flavors .bg { left: -19.1px; top: -51.5px; width: 1119.3px; height: 1988.9px; }
 /* تعتيم دافئ زي التصميم: ضرب في #977878 */
-#s-flavors .veil { inset: 0; background: #977878; mix-blend-mode: multiply; }
+#s-flavors .veil { top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; background: #977878; mix-blend-mode: multiply; }
 #s-flavors .logo { left: 50%; transform: translateX(-50%); top: 282px; width: 391px; color: #fff; }
 #s-flavors .title {
   left: 81px; top: 554px; width: 911px; height: 156px; border-radius: 999px;
@@ -315,7 +316,7 @@ img { display: block; -webkit-user-drag: none; pointer-events: none; }
 }
 #s-grid .cards {
   left: 60px; top: 404px; width: 960px;
-  display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 404px; gap: 30px 32px;
+  display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 404px; grid-gap: 30px 32px; gap: 30px 32px;
 }
 #s-grid .card {
   position: relative; border-radius: 40px; padding: 18px 20px;
@@ -327,9 +328,10 @@ img { display: block; -webkit-user-drag: none; pointer-events: none; }
 #s-grid .en  { font: 800 32px/1.06 'Dunkin Sans', sans-serif; color: var(--magenta); direction: ltr; }
 #s-grid .note{ font: 400 18px/1.4 'Dunkin Sans', sans-serif; color: rgba(60,30,10,.62);
                letter-spacing: .06em; direction: ltr; margin-top: 4px; }
-#s-grid .int { margin-top: auto; display: flex; align-items: center; gap: 12px; }
+#s-grid .int { margin-top: auto; display: flex; align-items: center; }
+#s-grid .int > * + * { margin-right: 12px; }
 #s-grid .bar { position: relative; width: 150px; height: 10px; border-radius: 5px; background: rgba(0,0,0,.12); }
-#s-grid .bar i { position: absolute; inset: 0 auto 0 0; border-radius: 5px; background: var(--orange); }
+#s-grid .bar i { position: absolute; top: 0; bottom: 0; left: 0; height: 100%; border-radius: 5px; background: var(--orange); }
 #s-grid .dot {
   min-width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
   background: var(--orange); color: #fff; border: 0;
